@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Åstorp Taekwondo Pass</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#AA1011">
+  <meta name="theme-color" content="#AA3024">
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Taekwondo Pass">
+  <meta name="apple-mobile-web-app-title" content="Taekwondo">
   <link rel="apple-touch-icon" href="icon-192.png">
 
   <style>
     :root {
-      --wallet-red: #AA1011;
-      --off-white: #FDFDFD;
-      --data-label-color: #EFE3E3;
-      --value-border: #007aff;
-      --card-radius: 20px;
+      /* The specific deep red from your image */
+      --wallet-red: #AA3024; 
+      --white: #ffffff;
+      --card-radius: 32px;
     }
 
     * {
@@ -26,119 +25,108 @@
       margin: 0;
       padding: 0;
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f4f4f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: #f0f0f2;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
       padding: 20px;
     }
+
     .card {
       background-color: var(--wallet-red);
       border-radius: var(--card-radius);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       width: 100%;
-      max-width: 360px;
-      padding: 25px 20px 30px 20px; /* Padding for entire card */
-      text-align: center;
+      max-width: 400px;
+      padding: 35px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
     }
 
-    /* Header with logo and title */
+    /* Top Logo and Name */
     .header {
       display: flex;
       align-items: center;
-      justify-content: start;
-      gap: 10px;
-      margin-bottom: 25px;
+      gap: 15px;
+      margin-bottom: 40px;
     }
-    .header .logo {
-      width: 40px;
-      height: 40px;
+
+    .header img {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      object-fit: cover;
+      background: white; /* Fallback if logo is transparent */
     }
+
     .header h1 {
-      font-size: 1.3rem;
-      color: var(--off-white);
+      color: var(--white);
+      font-size: 1.5rem;
       font-weight: 500;
-      margin: 0;
     }
 
-    /* Data Fields ("Onlinekod") */
-    .data-section {
+    /* Onlinekod section - Now updated to match image */
+    .info-section {
       text-align: left;
-      margin-bottom: 25px;
-      width: 100%;
-    }
-    .label {
-      font-size: 0.8rem;
-      color: var(--data-label-color);
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .value-box {
-      background-color: #ffffff;
-      border: 1.5px solid var(--value-border);
-      border-radius: 8px;
-      padding: 10px 15px;
-      width: 100%;
-    }
-    .big-value {
-      font-size: 2.2rem;
-      color: var(--wallet-red);
-      font-weight: 600;
-      margin: 0;
-      text-align: center;
+      margin-bottom: 40px;
     }
 
-    /* Barcode Area */
-    .barcode-area {
-      margin-top: auto; /* Push barcode towards bottom of card */
+    .label {
+      color: var(--white);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .value {
+      color: var(--white);
+      font-size: 3.5rem; /* Large text as seen in image */
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    /* Barcode Section */
+    .barcode-container {
+      text-align: center;
       width: 100%;
     }
-    .barcode-box {
-      background-color: #ffffff;
-      border-radius: 12px;
-      padding: 15px;
-      display: inline-block;
-      width: 100%;
-      margin-bottom: 5px;
+
+    .barcode-white-box {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 12px;
     }
-    .barcode-box img {
-      max-width: 100%;
+
+    .barcode-white-box img {
+      width: 100%;
       height: auto;
       display: block;
-      margin: 0 auto;
     }
-    .barcode-footer {
-      font-size: 0.85rem;
-      color: var(--off-white);
-      margin-top: 5px;
+
+    .barcode-number {
+      color: var(--white);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    /* Instructions for first-time users */
+    .install-hint {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #555;
       text-align: center;
+      max-width: 300px;
     }
 
-    /* Original instruction logic - hides in standalone mode */
-    .instructions {
-      font-size: 0.85rem;
-      color: #666666;
-      line-height: 1.4;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 25px;
-      width: 100%;
-      text-align: left;
-    }
-
-    /* The original display-mode instruction hide logic */
+    /* Hide instructions once installed */
     @media (display-mode: standalone) {
-      .instructions {
+      .install-hint {
         display: none;
       }
     }
@@ -148,43 +136,38 @@
 
   <div class="card">
     <div class="header">
-      <img src="logo.png" alt="Åstorp Taekwondo Logo" class="logo">
+      <img src="logo.png" alt="Logo">
       <h1>Åstorp Taekwondo</h1>
     </div>
 
-    <div class="data-section">
-      <p class="label">ONLINEKOD</p>
-      <div class="value-box">
-        <p class="big-value">58005</p>
-      </div>
+    <div class="info-section">
+      <div class="label">ONLINEKOD</div>
+      <div class="value">58005</div>
     </div>
 
-    <div class="barcode-area">
-      <div class="barcode-box">
-        <img src="barcode.png" alt="Membership Barcode">
+    <div class="barcode-container">
+      <div class="barcode-white-box">
+        <img src="barcode.png" alt="Barcode">
       </div>
-      <p class="barcode-footer">58005</p>
-    </div>
-
-    <div class="instructions" id="ios-instruction">
-      To save this to your phone:<br>
-      Tap <strong style="color: #007aff;">Share</strong> (bottom menu) then select <strong>'Add to Home Screen'</strong>.
+      <div class="barcode-number">58005</div>
     </div>
   </div>
 
+  <div class="install-hint" id="hint">
+    <strong>För smidig åtkomst:</strong><br>
+    Tryck på <span style="color:#007aff">Dela</span> och välj <strong>"Lägg till på hemskärmen"</strong>.
+  </div>
+
   <script>
-    // Register the service worker for offline capability
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('Service Worker registered successfully.', reg.scope))
-          .catch(err => console.log('Service Worker registration failed:', err));
+        navigator.serviceWorker.register('./sw.js');
       });
     }
-
-    // Hide instructions on iOS if already running as an installed PWA
+    
+    // Hide hint if already installed on iOS
     if (window.navigator.standalone === true) {
-      document.getElementById('ios-instruction').style.display = 'none';
+      document.getElementById('hint').style.display = 'none';
     }
   </script>
 
