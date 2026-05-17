@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Club Member Pass</title>
+  <title>Åstorp Taekwondo Pass</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#AA1011">
   
-  <!-- Apple PWA Meta Tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Member Pass">
+  <meta name="apple-mobile-web-app-title" content="Taekwondo Pass">
   <link rel="apple-touch-icon" href="icon-192.png">
 
   <style>
+    :root {
+      --wallet-red: #AA1011;
+      --off-white: #FDFDFD;
+      --data-label-color: #EFE3E3;
+      --value-border: #007aff;
+      --card-radius: 20px;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -30,47 +37,106 @@
       padding: 20px;
     }
     .card {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      background-color: var(--wallet-red);
+      border-radius: var(--card-radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       width: 100%;
       max-width: 360px;
-      padding: 30px 24px;
+      padding: 25px 20px 30px 20px; /* Padding for entire card */
       text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header with logo and title */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .header .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
     }
     .header h1 {
-      font-size: 1.4rem;
-      color: #1a1a1a;
-      margin-bottom: 4px;
+      font-size: 1.3rem;
+      color: var(--off-white);
+      font-weight: 500;
+      margin: 0;
     }
-    .header p {
-      font-size: 0.9rem;
-      color: #666666;
-      margin-bottom: 24px;
+
+    /* Data Fields ("Onlinekod") */
+    .data-section {
+      text-align: left;
+      margin-bottom: 25px;
+      width: 100%;
     }
-    .barcode-container {
-      background: #ffffff;
-      padding: 16px;
-      border: 1px solid #e1e1e6;
+    .label {
+      font-size: 0.8rem;
+      color: var(--data-label-color);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .value-box {
+      background-color: #ffffff;
+      border: 1.5px solid var(--value-border);
       border-radius: 8px;
+      padding: 10px 15px;
+      width: 100%;
+    }
+    .big-value {
+      font-size: 2.2rem;
+      color: var(--wallet-red);
+      font-weight: 600;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Barcode Area */
+    .barcode-area {
+      margin-top: auto; /* Push barcode towards bottom of card */
+      width: 100%;
+    }
+    .barcode-box {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
       display: inline-block;
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: 5px;
     }
-    .barcode-container img {
+    .barcode-box img {
       max-width: 100%;
       height: auto;
       display: block;
       margin: 0 auto;
     }
+    .barcode-footer {
+      font-size: 0.85rem;
+      color: var(--off-white);
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    /* Original instruction logic - hides in standalone mode */
     .instructions {
       font-size: 0.85rem;
-      color: #8a8a8f;
+      color: #666666;
       line-height: 1.4;
-      border-top: 1px solid #eeeeee;
-      padding-top: 16px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 25px;
+      width: 100%;
+      text-align: left;
     }
-    /* Hidden by default on standalone PWA installation */
+
+    /* The original display-mode instruction hide logic */
     @media (display-mode: standalone) {
       .instructions {
         display: none;
@@ -82,13 +148,22 @@
 
   <div class="card">
     <div class="header">
-      <h1>Club Entry Pass</h1>
-      <p>Scan at the reader</p>
+      <img src="logo.png" alt="Åstorp Taekwondo Logo" class="logo">
+      <h1>Åstorp Taekwondo</h1>
     </div>
 
-    <div class="barcode-container">
-      <!-- Replace with your actual barcode image filename -->
-      <img src="barcode.png" alt="Membership Barcode">
+    <div class="data-section">
+      <p class="label">ONLINEKOD</p>
+      <div class="value-box">
+        <p class="big-value">58005</p>
+      </div>
+    </div>
+
+    <div class="barcode-area">
+      <div class="barcode-box">
+        <img src="barcode.png" alt="Membership Barcode">
+      </div>
+      <p class="barcode-footer">58005</p>
     </div>
 
     <div class="instructions" id="ios-instruction">
